@@ -1,0 +1,19 @@
+# Exclude git metadata, local reference PDFs, Python tools, tests, and docs from Cloudflare static assets
+.git/
+.git/**
+.gitignore
+.assetsignore
+wrangler.jsonc
+resources/
+resources/**
+tests/
+tests/**
+inkworks/tools/
+inkworks/tools/**
+*.pdf
+*.py
+*.md
+node_modules/
+node_modules/**
+package.json
+package-lock.json

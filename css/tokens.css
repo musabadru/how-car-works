@@ -1,0 +1,43 @@
+:root {
+  /* Paper & ink (matches Inkworks drafting palette) */
+  --paper: #f8f9fb;
+  --paper-pure: #ffffff;
+  --desk: #e9edf3;
+  --ink: #161b26;
+  --ink-2: #4a5263;
+  --ink-3: #6c7587;
+  --rule: #cfd6e0;
+  --rule-soft: #e4e9f0;
+
+  /* Drafting grid */
+  --grid-minor: rgba(70, 110, 160, 0.06);
+  --grid-major: rgba(70, 110, 160, 0.11);
+
+  /* Semantic phase & accent hues */
+  --blue: #2f7de1;
+  --blue-soft: rgba(47, 125, 225, 0.12);
+  --ochre: #c87f00;
+  --ochre-fill: #d98e04;
+  --ochre-soft: rgba(217, 142, 4, 0.14);
+  --red: #e5482f;
+  --red-soft: rgba(229, 72, 47, 0.12);
+  --grey: #6b7485;
+  --grey-soft: rgba(123, 132, 148, 0.14);
+
+  /* Mechanical drawing fills */
+  --part-steel: #c3ccd8;
+  --part-alloy: #eef1f5;
+  --part-dark: #a4afbe;
+  --part-rubber: #8f98a7;
+  --part-copper: #d39a63;
+
+  /* Typography */
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Spacing & sizing */
+  --max-w: 1120px;
+  --radius: 2px;
+  --focus-ring: 2px solid var(--red);
+}

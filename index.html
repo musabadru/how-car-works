@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Cars Work · From fuel to the front wheels</title>
+  <meta name="description" content="Interactive engineering guide to how a modern car moves, starting with the 2019 Japan-market Toyota RAV4 X 2.0 petrol FWD.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-tag">Fig. 00</span>
+        <span class="brand-name">How Cars Work</span>
+      </a>
+      <nav class="site-nav" aria-label="Lesson sequence">
+        <a href="index.html" aria-current="page">01 Vehicle map</a>
+        <a href="lessons/engine.html">02 Engine</a>
+        <a href="lessons/driveline.html">03 Driveline</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="vehicle-bar" role="region" aria-label="Selected reference vehicle">
+    <div class="vehicle-bar-inner">
+      <span class="vehicle-pill">
+        <span class="vehicle-dot" aria-hidden="true"></span>
+        <span>Reference vehicle: 2019 Japan-market Toyota RAV4 X · 2.0L M20A-FKS petrol · Direct Shift-CVT · FWD</span>
+      </span>
+      <span class="vehicle-note">Roadmap comparison: 2019 RAV4 Hybrid X E-Four (planned)</span>
+    </div>
+  </div>
+
+  <main class="page" id="main">
+    <section class="hero">
+      <p class="eyebrow">First milestone · Interactive cutaway &amp; two-part lesson</p>
+      <h1>From <em>fuel</em> to the front wheels</h1>
+      <p class="lede">
+        Start on the vehicle cutaway below. Select the engine to step through all four strokes, then follow rotation through the Direct Shift-CVT, final drive and differential to the front tyres.
+      </p>
+      <div class="action-row">
+        <a class="btn btn-primary" href="lessons/engine.html">Start lesson: Four-stroke engine</a>
+        <a class="btn" href="#vehicle-map">Explore the vehicle map</a>
+      </div>
+    </section>
+
+    <section class="sheet-block" id="vehicle-map" aria-labelledby="map-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">A</span><span id="map-heading">Vehicle map · Front-wheel-drive powertrain</span></span>
+        <span class="block-hint">Tap a cutaway hotspot or use the keyboard list</span>
+      </div>
+
+      <div class="map-grid">
+        <div class="drawing-frame">
+          <svg class="cutaway-svg" viewBox="0 0 760 360" role="img" aria-labelledby="cutaway-title cutaway-desc">
+            <title id="cutaway-title">Original RAV4-inspired cutaway showing engine, Direct Shift-CVT, differential and front wheels</title>
+            <desc id="cutaway-desc">Side-profile engineering drawing of a front-wheel-drive compact SUV with four selectable mechanical hotspots in the front powertrain.</desc>
+
+            <!-- Ground & datum line -->
+            <line x1="28" y1="304" x2="732" y2="304" stroke="#161b26" stroke-width="1.5"/>
+            <line x1="28" y1="312" x2="732" y2="312" stroke="#cfd6e0" stroke-width="1" stroke-dasharray="6 4"/>
+            <text x="34" y="328" font-family="Geist Mono, monospace" font-size="10" fill="#6c7587">FRONT (DRIVE AXLE)</text>
+            <text x="646" y="328" font-family="Geist Mono, monospace" font-size="10" fill="#6c7587">REAR (FREE)</text>
+
+            <!-- Ghost SUV body shell (RAV4-inspired proportions, original drawing) -->
+            <g fill="rgba(107, 138, 176, 0.05)" stroke="#4a5263" stroke-width="1.4" stroke-dasharray="6 4">
+              <path d="M 78 258
+                       L 68 242
+                       L 72 192
+                       L 94 176
+                       L 196 162
+                       L 278 102
+                       L 494 98
+                       L 632 106
+                       L 678 164
+                       L 694 218
+                       L 686 256
+                       L 642 258
+                       C 634 210 564 210 556 258
+                       L 232 258
+                       C 224 210 154 210 146 258
+                       Z"/>
+              <!-- Greenhouse windows -->
+              <path d="M 224 162 L 288 114 L 408 112 L 408 162 Z" fill="rgba(255,255,255,0.4)"/>
+              <path d="M 422 112 L 542 114 L 548 162 L 422 162 Z" fill="rgba(255,255,255,0.4)"/>
+              <path d="M 560 116 L 622 118 L 652 160 L 564 162 Z" fill="rgba(255,255,255,0.4)"/>
+            </g>
+
+            <!-- Underbody floor pan & fuel path reference -->
+            <line x1="234" y1="252" x2="554" y2="252" stroke="#8f98a7" stroke-width="2"/>
+            <!-- Fuel tank (rear, unhighlighted context) -->
+            <rect x="468" y="216" width="76" height="32" rx="4" fill="#eef1f5" stroke="#8f98a7" stroke-width="1.2"/>
+            <text x="506" y="236" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#6c7587">FUEL TANK</text>
+            <!-- Fuel supply line from tank to engine bay -->
+            <path d="M 468 232 L 236 232 L 208 202 L 154 202" fill="none" stroke="#2f7de1" stroke-width="1.6" stroke-dasharray="4 3"/>
+            <text x="356" y="226" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#2f7de1">PETROL SUPPLY LINE</text>
+
+            <!-- Rear non-driven wheel (context) -->
+            <g opacity="0.68">
+              <circle cx="599" cy="256" r="46" fill="#eef1f5" stroke="#4a5263" stroke-width="2"/>
+              <circle cx="599" cy="256" r="29" fill="#f8f9fb" stroke="#4a5263" stroke-width="1.4"/>
+              <circle cx="599" cy="256" r="7" fill="#a4afbe" stroke="#4a5263" stroke-width="1.2"/>
+            </g>
+
+            <!-- Torque path directional flow arrow (Engine -> CVT -> Differential -> Front Wheel) -->
+            <path d="M 134 198 L 198 198 L 220 228 L 190 256" fill="none" stroke="#e5482f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- HOTSPOT 1: ENGINE -->
+            <g class="hotspot is-active" data-part="engine" role="button" tabindex="0" aria-label="1. Engine: 2.0-litre M20A-FKS inline-four petrol" aria-pressed="true">
+              <rect class="hs-halo" x="88" y="156" width="84" height="72" rx="6"/>
+              <rect class="hs-focus-ring" x="88" y="156" width="84" height="72" rx="6" fill="none" stroke="transparent"/>
+              <!-- Engine block + 4 cylinder tops -->
+              <rect x="98" y="176" width="64" height="44" rx="3" fill="#c3ccd8" stroke="#161b26" stroke-width="1.6"/>
+              <rect x="103" y="166" width="54" height="12" rx="2" fill="#eef1f5" stroke="#161b26" stroke-width="1.4"/>
+              <line x1="114" y1="176" x2="114" y2="218" stroke="#161b26" stroke-width="1"/>
+              <line x1="130" y1="176" x2="130" y2="218" stroke="#161b26" stroke-width="1"/>
+              <line x1="146" y1="176" x2="146" y2="218" stroke="#161b26" stroke-width="1"/>
+              <circle cx="108" cy="196" r="4" fill="#2f7de1"/>
+              <circle cx="122" cy="196" r="4" fill="#d98e04"/>
+              <circle cx="138" cy="196" r="4" fill="#e5482f"/>
+              <circle cx="152" cy="196" r="4" fill="#7b8494"/>
+              <!-- Leader & numbered drafting balloon -->
+              <polyline points="130,164 130,82 146,82" fill="none" stroke="#161b26" stroke-width="1.2"/>
+              <circle class="hs-badge-bg" cx="130" cy="70" r="13" fill="#e5482f" stroke="#161b26" stroke-width="1.4"/>
+              <text class="hs-badge-num" x="130" y="74" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#ffffff">1</text>
+              <text x="150" y="74" font-family="Geist Mono, monospace" font-size="11" font-weight="500" fill="#161b26">ENGINE</text>
+            </g>
+
+            <!-- HOTSPOT 2: DIRECT SHIFT-CVT -->
+            <g class="hotspot" data-part="transmission" role="button" tabindex="0" aria-label="2. Transmission: Direct Shift-CVT" aria-pressed="false">
+              <rect class="hs-halo" x="172" y="168" width="66" height="58" rx="6"/>
+              <rect class="hs-focus-ring" x="172" y="168" width="66" height="58" rx="6" fill="none" stroke="transparent"/>
+              <!-- Transaxle CVT housing + two pulleys & belt -->
+              <rect x="178" y="176" width="54" height="42" rx="4" fill="#eef1f5" stroke="#161b26" stroke-width="1.5"/>
+              <circle cx="194" cy="196" r="10" fill="#d39a63" stroke="#161b26" stroke-width="1.3"/>
+              <circle cx="218" cy="198" r="12" fill="#c3ccd8" stroke="#161b26" stroke-width="1.3"/>
+              <line x1="194" y1="186" x2="218" y2="186" stroke="#161b26" stroke-width="1.6"/>
+              <line x1="194" y1="206" x2="218" y2="210" stroke="#161b26" stroke-width="1.6"/>
+              <!-- Leader & balloon -->
+              <polyline points="206,174 206,112 248,112" fill="none" stroke="#161b26" stroke-width="1.2"/>
+              <circle class="hs-badge-bg" cx="248" cy="112" r="13" fill="#f8f9fb" stroke="#161b26" stroke-width="1.4"/>
+              <text class="hs-badge-num" x="248" y="116" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#161b26">2</text>
+              <text x="268" y="116" font-family="Geist Mono, monospace" font-size="11" font-weight="500" fill="#161b26">CVT</text>
+            </g>
+
+            <!-- HOTSPOT 3: FINAL DRIVE & DIFFERENTIAL -->
+            <g class="hotspot" data-part="differential" role="button" tabindex="0" aria-label="3. Final drive and open differential" aria-pressed="false">
+              <rect class="hs-halo" x="200" y="216" width="46" height="42" rx="6"/>
+              <rect class="hs-focus-ring" x="200" y="216" width="46" height="42" rx="6" fill="none" stroke="transparent"/>
+              <circle cx="222" cy="236" r="13" fill="#c3ccd8" stroke="#161b26" stroke-width="1.6"/>
+              <circle cx="222" cy="236" r="5" fill="#e5482f" stroke="#161b26" stroke-width="1.2"/>
+              <!-- Leader & balloon -->
+              <polyline points="234,236 296,236 296,192" fill="none" stroke="#161b26" stroke-width="1.2"/>
+              <circle class="hs-badge-bg" cx="296" cy="180" r="13" fill="#f8f9fb" stroke="#161b26" stroke-width="1.4"/>
+              <text class="hs-badge-num" x="296" y="184" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#161b26">3</text>
+              <text x="316" y="184" font-family="Geist Mono, monospace" font-size="11" font-weight="500" fill="#161b26">DIFF</text>
+            </g>
+
+            <!-- HOTSPOT 4: FRONT WHEELS -->
+            <g class="hotspot" data-part="wheels" role="button" tabindex="0" aria-label="4. Front wheels and half-shafts" aria-pressed="false">
+              <circle class="hs-halo" cx="189" cy="256" r="52"/>
+              <circle class="hs-focus-ring" cx="189" cy="256" r="52" fill="none" stroke="transparent"/>
+              <circle cx="189" cy="256" r="46" fill="#8f98a7" fill-opacity="0.28" stroke="#161b26" stroke-width="2.2"/>
+              <circle cx="189" cy="256" r="29" fill="#eef1f5" stroke="#161b26" stroke-width="1.6"/>
+              <circle cx="189" cy="256" r="9" fill="#c3ccd8" stroke="#161b26" stroke-width="1.4"/>
+              <!-- Half-shaft marker line -->
+              <line x1="189" y1="256" x2="222" y2="236" stroke="#161b26" stroke-width="3" stroke-linecap="round"/>
+              <!-- Leader & balloon -->
+              <polyline points="145,274 96,274 96,294" fill="none" stroke="#161b26" stroke-width="1.2"/>
+              <circle class="hs-badge-bg" cx="96" cy="274" r="13" fill="#f8f9fb" stroke="#161b26" stroke-width="1.4"/>
+              <text class="hs-badge-num" x="96" y="278" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#161b26">4</text>
+              <text x="34" y="278" font-family="Geist Mono, monospace" font-size="11" font-weight="500" fill="#161b26">WHEEL</text>
+            </g>
+          </svg>
+
+          <div class="drawing-caption">
+            <span>DWG: RAV4-FWD-001 · Original cutaway schematic (not to scale)</span>
+            <span>Torque path: 1 → 2 → 3 → 4</span>
+          </div>
+        </div>
+
+        <aside class="map-sidebar" aria-label="Powertrain parts and details">
+          <ul class="part-list" id="partList">
+            <li>
+              <button class="part-btn" type="button" data-part="engine" aria-pressed="true">
+                <span class="part-num">1</span>
+                <span>
+                  <span class="part-title">Engine</span>
+                  <span class="part-sub">2.0L M20A-FKS inline-4 petrol</span>
+                </span>
+                <span class="part-tag">Lesson 02</span>
+              </button>
+            </li>
+            <li>
+              <button class="part-btn" type="button" data-part="transmission" aria-pressed="false">
+                <span class="part-num">2</span>
+                <span>
+                  <span class="part-title">Direct Shift-CVT</span>
+                  <span class="part-sub">Launch gear + belt variator</span>
+                </span>
+                <span class="part-tag">Lesson 03</span>
+              </button>
+            </li>
+            <li>
+              <button class="part-btn" type="button" data-part="differential" aria-pressed="false">
+                <span class="part-num">3</span>
+                <span>
+                  <span class="part-title">Final drive &amp; differential</span>
+                  <span class="part-sub">Splits torque left and right</span>
+                </span>
+                <span class="part-tag">Lesson 03</span>
+              </button>
+            </li>
+            <li>
+              <button class="part-btn" type="button" data-part="wheels" aria-pressed="false">
+                <span class="part-num">4</span>
+                <span>
+                  <span class="part-title">Front wheels</span>
+                  <span class="part-sub">Half-shafts drive front tyres</span>
+                </span>
+                <span class="part-tag">Lesson 03</span>
+              </button>
+            </li>
+          </ul>
+
+          <div class="inspector" id="partInspector" aria-live="polite">
+            <p class="inspector-kicker" id="inspKicker">Stage 1 of 4 · Makes rotation</p>
+            <h3 id="inspTitle">Four-stroke petrol engine</h3>
+            <p id="inspDesc">
+              Burns a compressed mix of air and petrol across four cylinders to spin the crankshaft. Two full crankshaft turns complete intake, compression, power and exhaust in every cylinder.
+            </p>
+            <dl class="inspector-meta">
+              <dt>RAV4 X part</dt>
+              <dd id="inspPart">2.0L M20A-FKS inline-four petrol</dd>
+              <dt>Next in chain</dt>
+              <dd id="inspNext">Direct Shift-CVT input shaft</dd>
+            </dl>
+            <a class="btn btn-accent" id="inspLink" href="lessons/engine.html">Open Engine lesson</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="route-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">B</span><span id="route-heading">Lesson sequence · From fuel to the front wheels</span></span>
+        <span class="block-hint">First milestone scope</span>
+      </div>
+      <div class="sequence-grid">
+        <article class="seq-card">
+          <span class="seq-step">Step 01 · You are here</span>
+          <h3>Locate the powertrain</h3>
+          <p>See how a front-wheel-drive RAV4 packages the engine, transaxle CVT and differential ahead of the cabin, leaving the rear axle undriven.</p>
+          <a class="seq-link" href="#vehicle-map">Back to cutaway</a>
+        </article>
+        <article class="seq-card">
+          <span class="seq-step">Step 02 · Engine lesson</span>
+          <h3>Step through four strokes</h3>
+          <p>Use the 2D cutaway or load the interactive Inkworks 3D figure to follow intake, compression, power and exhaust across 720 degrees.</p>
+          <a class="seq-link" href="lessons/engine.html">Open Engine lesson →</a>
+        </article>
+        <article class="seq-card">
+          <span class="seq-step">Step 03 · Driveline lesson</span>
+          <h3>Trace torque to the road</h3>
+          <p>Switch the Direct Shift-CVT from launch gear to belt cruise, then turn the car left and right to watch the differential split front-wheel speeds.</p>
+          <a class="seq-link" href="lessons/driveline.html">Open Driveline lesson →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="roadmap-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">C</span><span id="roadmap-heading">Planned next releases (roadmap)</span></span>
+        <span class="block-hint">Not yet live · built after reviewing this first lesson</span>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <span class="roadmap-badge">Planned · Milestone 4</span>
+          <h3>Brakes &amp; tyres</h3>
+          <p>Pedal force to hydraulic calipers plus an illustrative ABS wheel-lock scenario.</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge">Planned · Milestone 5</span>
+          <h3>Steering &amp; suspension</h3>
+          <p>Turning the front wheels while moving a single wheel over a bump to separate spring and damper roles.</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge">Planned · First comparison</span>
+          <h3>2019 RAV4 Hybrid X E-Four</h3>
+          <p>Planned future comparison showing Toyota's hybrid power-split system alongside the petrol Direct Shift-CVT.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="sources-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">D</span><span id="sources-heading">Reference vehicle &amp; source record</span></span>
+        <span class="block-hint">Verified for Phase 1 scope</span>
+      </div>
+      <table class="spec-table">
+        <tbody>
+          <tr>
+            <th scope="row">Selected vehicle</th>
+            <td>2019 Japan-market Toyota RAV4 X (2WD / front-wheel drive)</td>
+          </tr>
+          <tr>
+            <th scope="row">Engine &amp; transmission</th>
+            <td>2.0-litre M20A-FKS inline-four petrol paired with Direct Shift-CVT (physical launch gear plus steel-belt variator)</td>
+          </tr>
+          <tr>
+            <th scope="row">Primary sources</th>
+            <td>
+              <a href="https://global.toyota/en/newsroom/toyota/27541875.html" target="_blank" rel="noopener noreferrer">Toyota Japan RAV4 launch specifications</a> ·
+              <a href="https://global.toyota/en/mobility/tnga/powertrain2018/cvt/" target="_blank" rel="noopener noreferrer">Toyota Direct Shift-CVT overview</a> ·
+              John B. Heywood, <em>Internal Combustion Engine Fundamentals</em> (four-stroke cycle principles)
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3D kit &amp; artwork</th>
+            <td>Original project SVGs; vendored <a href="https://github.com/Moh4696/inkworks-skill" target="_blank" rel="noopener noreferrer">Inkworks</a> kit and Three.js (MIT Licence)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>How Cars Work · Milestone 1: From fuel to the front wheels</span>
+      <span>Works with touch, keyboard, reduced motion and WebGL disabled</span>
+    </div>
+  </footer>
+
+  <script type="module" src="js/vehicle-map.js"></script>
+</body>
+</html>

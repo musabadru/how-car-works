@@ -1,0 +1,53 @@
+{
+  "firstMilestone": {
+    "title": "From fuel to the front wheels",
+    "vehicleId": "rav4-2019-jp-x-fwd",
+    "sequence": ["vehicle-map", "engine", "driveline"]
+  },
+  "lessons": [
+    {
+      "id": "engine",
+      "title": "Four-stroke petrol engine",
+      "path": "lessons/engine.html",
+      "question": "How does burning fuel inside four cylinders turn a steel shaft?",
+      "objective": "Step through intake, compression, power and exhaust across two full crankshaft revolutions (720 degrees) and see why only one stroke produces work.",
+      "vehicleApplicability": "2019 Japan-market Toyota RAV4 X uses a 2.0-litre M20A-FKS inline-four four-stroke petrol engine. The interactive 3D cutaway is the stock Inkworks generic inline-four four-stroke petrol demonstration (firing order 1-3-4-2) rather than a CAD replica of the M20A-FKS.",
+      "controls": [
+        "2D four-stroke step controls (Previous, Next, direct phase buttons) always available without WebGL",
+        "Click-to-load Inkworks 3D figure with Play/Pause, Step, Slow motion, Throttle slider, Cylinder selector and Orbit",
+        "Link to full Inkworks engineering drafting sheet"
+      ],
+      "fallback": "Interactive SVG cutaway of a single cylinder showing piston position, intake/exhaust valves, spark and stroke description for all four strokes, usable with keyboard, touch, reduced motion and WebGL disabled.",
+      "simplifications": [
+        "Generic inline-four geometry, 10:1 illustrative compression ratio and belt-driven cams from the stock Inkworks engine demo.",
+        "Pressure curve and valve lift profiles are smooth closed-form teaching approximations rather than measured M20A-FKS cylinder pressure traces."
+      ],
+      "sources": [
+        "toyota-jp-rav4-2019-launch",
+        "heywood-ice-fundamentals",
+        "inkworks-kit"
+      ]
+    },
+    {
+      "id": "driveline",
+      "title": "Transmission, final drive and differential",
+      "path": "lessons/driveline.html",
+      "question": "How does engine rotation reach the front tyres, and why do the front wheels turn at different speeds in a corner?",
+      "objective": "Trace torque from the engine through the Direct Shift-CVT launch gear and belt variator into the final drive, open differential and front wheels.",
+      "vehicleApplicability": "2019 Japan-market Toyota RAV4 X FWD uses Toyota's Direct Shift-CVT (mechanical launch gear plus steel-belt variator) integrated with a front transaxle final drive and differential.",
+      "controls": [
+        "Interaction 1: Direct Shift-CVT Launch vs Cruise mode toggle, plus a Belt Ratio slider active in Cruise mode",
+        "Interaction 2: Open Differential Straight, Left turn and Right turn selector with Pause/Play and Reset"
+      ],
+      "fallback": "Native inline SVG diagrams with live synchronized text readouts and static labels; requires no WebGL and supports reduced motion and keyboard controls.",
+      "simplifications": [
+        "Launch-to-belt mode switching is reader-controlled so the lesson does not imply engine RPM alone triggers the real transmission's shift schedule.",
+        "Illustrative ratio range (low to overdrive) and cornering wheel-speed split demonstrate operating principles without claiming exact OEM gear tooth counts or vehicle road speeds."
+      ],
+      "sources": [
+        "toyota-jp-rav4-2019-launch",
+        "toyota-direct-shift-cvt-2018"
+      ]
+    }
+  ]
+}

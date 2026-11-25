@@ -1,0 +1,48 @@
+{
+  "sources": [
+    {
+      "id": "toyota-jp-rav4-2019-launch",
+      "title": "Toyota Launches All-New RAV4 in Japan (Launch Specifications)",
+      "publisher": "Toyota Motor Corporation Global Newsroom",
+      "url": "https://global.toyota/en/newsroom/toyota/27541875.html",
+      "usedFor": "2019 Japan-market RAV4 X grade, 2.0-litre M20A-FKS petrol engine, Direct Shift-CVT and front-wheel drive pairing; Hybrid X E-Four roadmap reference."
+    },
+    {
+      "id": "toyota-direct-shift-cvt-2018",
+      "title": "TNGA Powertrain: Direct Shift-CVT",
+      "publisher": "Toyota Motor Corporation Official Global Website",
+      "url": "https://global.toyota/en/mobility/tnga/powertrain2018/cvt/",
+      "usedFor": "Direct Shift-CVT operating concept: physical launch gear for starting from rest handing off to the steel-belt variator pulleys for cruising."
+    },
+    {
+      "id": "toyota-jp-rav4-manual",
+      "title": "Toyota RAV4 Owner's Manuals (Japan)",
+      "publisher": "Toyota Motor Corporation",
+      "url": "https://manual.toyota.jp/rav4/",
+      "usedFor": "Reference check for Japan-market RAV4 operating details as lessons expand."
+    },
+    {
+      "id": "heywood-ice-fundamentals",
+      "title": "Internal Combustion Engine Fundamentals",
+      "author": "John B. Heywood",
+      "publisher": "McGraw-Hill",
+      "usedFor": "Four-stroke spark-ignition cycle fundamentals (720-degree two-revolution cycle, intake/compression/power/exhaust sequence, valve timing concepts and pressure-volume work)."
+    }
+  ],
+  "assets": [
+    {
+      "id": "inkworks-kit",
+      "name": "Inkworks 3D Engineering Sheet Kit & Three.js r169",
+      "origin": "https://github.com/Moh4696/inkworks-skill",
+      "licence": "MIT License (Inkworks copyright 2026 exploraX; vendored Three.js under MIT License)",
+      "notes": "Vendored under inkworks/ with minimal same-origin embed pause/resume and WebGL-fallback handling in inkworks/js/sheet.js."
+    },
+    {
+      "id": "original-svgs",
+      "name": "Original RAV4-inspired cutaway map, 4-stroke SVG fallback, Direct Shift-CVT and open differential diagrams",
+      "origin": "Authored directly in this repository",
+      "licence": "Project original artwork",
+      "notes": "Drawn in the shared Inkworks drafting palette for semantic HTML/SVG delivery."
+    }
+  ]
+}

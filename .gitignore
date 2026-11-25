@@ -1,0 +1,14 @@
+# Local technical reference files (copyrighted books, large PDFs, manuals)
+resources/*
+!resources/.gitkeep
+
+# Python / tooling caches
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+tests/artifacts/
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db

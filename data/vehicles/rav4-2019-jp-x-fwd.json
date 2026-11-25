@@ -1,0 +1,40 @@
+{
+  "id": "rav4-2019-jp-x-fwd",
+  "displayName": "2019 Toyota RAV4 X (Japan-market, 2.0 petrol, FWD)",
+  "shortName": "2019 JDM RAV4 X · 2.0L FWD",
+  "market": "Japan",
+  "modelYear": 2019,
+  "productionPeriod": "Launch release (April 2019)",
+  "model": "Toyota RAV4",
+  "grade": "X",
+  "drivetrain": {
+    "layout": "Front-engine, front-wheel drive (2WD / FF)",
+    "engine": {
+      "code": "M20A-FKS",
+      "description": "2.0-litre inline four-cylinder four-stroke petrol engine (Dynamic Force)",
+      "cylinders": 4,
+      "fuel": "Petrol (gasoline)"
+    },
+    "transmission": {
+      "name": "Direct Shift-CVT",
+      "description": "Continuously variable transmission with a physical launch gear for standing starts and a steel-belt pulley variator for cruising"
+    },
+    "frontAxle": {
+      "description": "Transaxle final drive and open differential sending torque via left and right half-shafts to the front wheels"
+    }
+  },
+  "phase1ScopeNote": "Only drivetrain and grade details actively used by the 'From fuel to the front wheels' lesson are recorded here. Detailed engine dimensions and suspension geometry will be verified and added when later lessons require them.",
+  "roadmapComparisons": [
+    {
+      "id": "rav4-2019-jp-hybrid-x-efour",
+      "displayName": "2019 Toyota RAV4 Hybrid X E-Four (Japan-market)",
+      "status": "planned",
+      "note": "Planned first comparison for the Hybrid and electric expansion release."
+    }
+  ],
+  "sources": [
+    "toyota-jp-rav4-2019-launch",
+    "toyota-direct-shift-cvt-2018",
+    "toyota-jp-rav4-manual"
+  ]
+}

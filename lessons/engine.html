@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Four-stroke petrol engine · How Cars Work</title>
+  <meta name="description" content="Step through intake, compression, power and exhaust across two crankshaft revolutions using an interactive 2D cutaway and the Inkworks 3D figure.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/lesson.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-tag">Fig. 01</span>
+        <span class="brand-name">How Cars Work</span>
+      </a>
+      <nav class="site-nav" aria-label="Lesson sequence">
+        <a href="../index.html">01 Vehicle map</a>
+        <a href="engine.html" aria-current="page">02 Engine</a>
+        <a href="driveline.html">03 Driveline</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="vehicle-bar" role="region" aria-label="Selected reference vehicle">
+    <div class="vehicle-bar-inner">
+      <span class="vehicle-pill">
+        <span class="vehicle-dot" aria-hidden="true"></span>
+        <span>Reference vehicle: 2019 Japan-market Toyota RAV4 X · 2.0L M20A-FKS petrol · Direct Shift-CVT · FWD</span>
+      </span>
+      <span class="vehicle-note">From fuel to the front wheels · Part 1 of 2</span>
+    </div>
+  </div>
+
+  <main class="page" id="main">
+    <header class="lesson-header">
+      <div>
+        <p class="eyebrow">Lesson 02 · Four-stroke petrol engine</p>
+        <h1>How does burning fuel turn a <em>steel shaft</em>?</h1>
+        <p class="question-lead">
+          Each cylinder repeats four strokes across two full crankshaft turns (720 degrees). Step through the cycle below or open the interactive 3D Inkworks model.
+        </p>
+      </div>
+
+      <aside class="mini-locator" aria-label="Location on vehicle map">
+        <div class="mini-locator-label">
+          <span>Vehicle locator</span>
+          <strong>01 · Engine</strong>
+        </div>
+        <svg viewBox="0 0 240 86" role="img" aria-label="RAV4 side silhouette with the front engine bay highlighted">
+          <line x1="10" y1="74" x2="230" y2="74" stroke="#cfd6e0" stroke-width="1"/>
+          <path d="M 24 62 L 22 44 L 32 39 L 62 35 L 88 18 L 160 17 L 204 20 L 218 39 L 222 62 L 206 62 C 202 48 182 48 178 62 L 74 62 C 70 48 50 48 46 62 Z" fill="rgba(107,138,176,.08)" stroke="#6c7587" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <circle cx="60" cy="62" r="12" fill="#eef1f5" stroke="#6c7587" stroke-width="1.2"/>
+          <circle cx="192" cy="62" r="12" fill="#eef1f5" stroke="#6c7587" stroke-width="1.2"/>
+          <rect x="31" y="40" width="22" height="16" rx="2" fill="#e5482f" stroke="#161b26" stroke-width="1.2"/>
+        </svg>
+      </aside>
+    </header>
+
+    <section class="sheet-block" aria-labelledby="interactive-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">A</span><span id="interactive-heading">Interactive four-stroke cycle</span></span>
+        <span class="block-hint">720° = 2 crankshaft revolutions</span>
+      </div>
+
+      <div class="demo-panel" id="engineDemo">
+        <div class="demo-toolbar">
+          <div class="demo-status" id="viewerStatus" role="status" aria-live="polite">
+            Mode: <strong>2D four-stroke cutaway</strong> (instant, works without WebGL)
+          </div>
+          <div class="action-row">
+            <button class="btn btn-primary" type="button" id="toggle3dBtn">Load interactive 3D engine</button>
+            <a class="btn" href="../inkworks/index.html?m=engine&amp;layout=sheet" target="_blank" rel="noopener noreferrer">Open full drafting sheet</a>
+          </div>
+        </div>
+
+        <div class="demo-body">
+          <!-- WebGL-disabled / fallback notification (shown only when needed) -->
+          <div class="notice-box" id="webglNotice" hidden role="status" aria-live="polite"></div>
+
+          <!-- 3D Inkworks mount (click-to-load, suspended off-screen via IntersectionObserver) -->
+          <div id="embedSection" hidden>
+            <div class="inkworks-frame-wrap" id="embedFrameWrap"></div>
+            <div class="embed-banner">
+              <span id="embedSyncText">3D figure loaded · drag inside frame to orbit, scroll outside to continue reading</span>
+              <span id="embedPowerState">Loop active</span>
+            </div>
+          </div>
+
+          <!-- Always-ready interactive 2D SVG cutaway -->
+          <div id="fallback2dSection">
+            <div class="engine-stage-grid">
+              <div class="svg-stage">
+                <svg id="engine2dSvg" viewBox="0 0 360 360" role="img" aria-labelledby="eng2d-title eng2d-desc">
+                  <title id="eng2d-title">Interactive single-cylinder four-stroke engine cutaway</title>
+                  <desc id="eng2d-desc">Shows cylinder walls, moving piston, connecting rod, rotating crankshaft, intake and exhaust valves, spark plug and coloured combustion chamber across 720 crank degrees.</desc>
+
+                  <!-- Intake & Exhaust ports -->
+                  <path d="M 42 56 L 122 56 L 138 78 L 114 96 L 42 96 Z" fill="#eef1f5" stroke="#161b26" stroke-width="1.4"/>
+                  <text x="50" y="80" font-family="Geist Mono, monospace" font-size="10" fill="#2f7de1" font-weight="600">INTAKE</text>
+                  <path d="M 318 56 L 238 56 L 222 78 L 246 96 L 318 96 Z" fill="#eef1f5" stroke="#161b26" stroke-width="1.4"/>
+                  <text x="256" y="80" font-family="Geist Mono, monospace" font-size="10" fill="#6b7485" font-weight="600">EXHAUST</text>
+
+                  <!-- Cylinder block walls -->
+                  <rect x="116" y="76" width="128" height="148" fill="#ffffff" stroke="#161b26" stroke-width="2"/>
+                  <rect x="104" y="72" width="12" height="154" fill="#c3ccd8" stroke="#161b26" stroke-width="1.4"/>
+                  <rect x="244" y="72" width="12" height="154" fill="#c3ccd8" stroke="#161b26" stroke-width="1.4"/>
+                  <rect x="104" y="56" width="152" height="20" fill="#c3ccd8" stroke="#161b26" stroke-width="1.5"/>
+
+                  <!-- Dynamic gas chamber volume -->
+                  <rect id="gasChamber" x="118" y="78" width="124" height="72" fill="#2f7de1" fill-opacity="0.32"/>
+
+                  <!-- Spark plug -->
+                  <rect x="174" y="34" width="12" height="44" fill="#ffffff" stroke="#161b26" stroke-width="1.4"/>
+                  <line x1="180" y1="78" x2="180" y2="85" stroke="#161b26" stroke-width="2"/>
+                  <g id="sparkFlash" opacity="0">
+                    <circle cx="180" cy="89" r="13" fill="#e5482f" fill-opacity="0.28"/>
+                    <polygon points="180,76 184,86 194,85 186,91 190,101 180,94 170,101 174,91 166,85 176,86" fill="#e5482f"/>
+                  </g>
+
+                  <!-- Intake valve (left) -->
+                  <g id="intakeValve" transform="translate(0, 0)">
+                    <rect x="143" y="42" width="4" height="36" fill="#4a5263"/>
+                    <polygon points="131,78 159,78 153,83 137,83" fill="#dde3ec" stroke="#161b26" stroke-width="1.3"/>
+                  </g>
+
+                  <!-- Exhaust valve (right) -->
+                  <g id="exhaustValve" transform="translate(0, 0)">
+                    <rect x="213" y="42" width="4" height="36" fill="#4a5263"/>
+                    <polygon points="201,78 229,78 223,83 207,83" fill="#dde3ec" stroke="#161b26" stroke-width="1.3"/>
+                  </g>
+
+                  <!-- Crankcase outline -->
+                  <circle cx="180" cy="272" r="64" fill="rgba(195,204,216,0.16)" stroke="#8f98a7" stroke-width="1.3" stroke-dasharray="5 4"/>
+
+                  <!-- Connecting rod -->
+                  <line id="conRod" x1="180" y1="150" x2="180" y2="236" stroke="#a4afbe" stroke-width="10" stroke-linecap="round"/>
+                  <line id="conRodInk" x1="180" y1="150" x2="180" y2="236" stroke="#161b26" stroke-width="1.6"/>
+
+                  <!-- Piston -->
+                  <g id="pistonGroup" transform="translate(0, 0)">
+                    <rect x="120" y="130" width="120" height="44" rx="2" fill="#eef1f5" stroke="#161b26" stroke-width="1.8"/>
+                    <line x1="120" y1="138" x2="240" y2="138" stroke="#161b26" stroke-width="1.2"/>
+                    <line x1="120" y1="144" x2="240" y2="144" stroke="#161b26" stroke-width="1.2"/>
+                    <circle cx="180" cy="158" r="7" fill="#c3ccd8" stroke="#161b26" stroke-width="1.5"/>
+                  </g>
+
+                  <!-- Crankshaft disc, web & pin -->
+                  <circle cx="180" cy="272" r="46" fill="#eef1f5" stroke="#161b26" stroke-width="1.5"/>
+                  <line id="crankWeb" x1="180" y1="272" x2="180" y2="236" stroke="#c3ccd8" stroke-width="14" stroke-linecap="round"/>
+                  <line id="crankMark" x1="180" y1="272" x2="180" y2="236" stroke="#e5482f" stroke-width="2.2" stroke-linecap="round"/>
+                  <circle cx="180" cy="272" r="9" fill="#c3ccd8" stroke="#161b26" stroke-width="1.6"/>
+                  <circle id="crankPin" cx="180" cy="236" r="7" fill="#ffffff" stroke="#161b26" stroke-width="1.6"/>
+
+                  <!-- Labels -->
+                  <text x="16" y="346" font-family="Geist Mono, monospace" font-size="10" fill="#6c7587">TDC: 0° / 360°</text>
+                  <text x="242" y="346" font-family="Geist Mono, monospace" font-size="10" fill="#6c7587">BDC: 180° / 540°</text>
+                </svg>
+              </div>
+
+              <div class="phase-readout-box" id="phasePanel" aria-live="polite">
+                <div class="phase-header">
+                  <span class="phase-index" id="p2dNum">01</span>
+                  <div>
+                    <h2 class="phase-title" id="p2dName">Intake</h2>
+                    <span class="phase-nick" id="p2dNick">"suck" · 0° to 180°</span>
+                  </div>
+                </div>
+                <p class="phase-desc" id="p2dDesc">
+                  The piston moves down while the intake valve opens. The expanding space drops pressure inside the cylinder and draws fresh air and fuel in.
+                </p>
+
+                <div class="phase-pills" role="group" aria-label="Jump to stroke">
+                  <button class="phase-pill" type="button" data-phase="0" aria-pressed="true"><span class="dot" style="background:var(--blue)"></span>Intake</button>
+                  <button class="phase-pill" type="button" data-phase="1" aria-pressed="false"><span class="dot" style="background:var(--ochre-fill)"></span>Compress</button>
+                  <button class="phase-pill" type="button" data-phase="2" aria-pressed="false"><span class="dot" style="background:var(--red)"></span>Power</button>
+                  <button class="phase-pill" type="button" data-phase="3" aria-pressed="false"><span class="dot" style="background:var(--grey)"></span>Exhaust</button>
+                </div>
+
+                <dl class="telemetry-dl">
+                  <div>
+                    <dt>Crank angle</dt>
+                    <dd id="t2dAngle">60° / 720°</dd>
+                  </div>
+                  <div>
+                    <dt>Crankshaft turn</dt>
+                    <dd id="t2dTurn">Turn 1 of 2</dd>
+                  </div>
+                  <div>
+                    <dt>Intake valve</dt>
+                    <dd id="t2dIn">Open</dd>
+                  </div>
+                  <div>
+                    <dt>Exhaust valve</dt>
+                    <dd id="t2dEx">Closed</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="ctrl-bar">
+              <div class="seg-group" role="group" aria-label="Cycle playback controls">
+                <button class="seg-btn" type="button" id="prevStrokeBtn">Prev stroke</button>
+                <button class="seg-btn" type="button" id="play2dBtn" aria-pressed="false">Play</button>
+                <button class="seg-btn" type="button" id="nextStrokeBtn">Next stroke</button>
+                <button class="seg-btn" type="button" id="reset2dBtn">Reset</button>
+              </div>
+              <div class="range-wrap">
+                <label for="crankSlider">Scrub crank angle</label>
+                <input type="range" id="crankSlider" min="0" max="720" step="1" value="60">
+                <span class="range-readout" id="sliderDeg">60° (Turn 1)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <strong>Model scope note:</strong> The 2019 Japan-market Toyota RAV4 X uses the 2.0-litre M20A-FKS inline-four petrol engine. The 3D cutaway here is the stock Inkworks <strong>generic inline-four</strong> four-stroke petrol demonstration (1-3-4-2 firing order, illustrative 10:1 geometry) rather than a CAD replica of the M20A-FKS.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="explain-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">B</span><span id="explain-heading">Why four strokes take two full turns</span></span>
+        <span class="block-hint">Plain language + engineering notes</span>
+      </div>
+
+      <div class="prose-columns">
+        <div>
+          <p>
+            One up-or-down trip of a piston is half a crankshaft turn (180 degrees). Because the cylinder needs four distinct trips to breathe in fresh mixture, squeeze it, burn it and push out exhaust, a complete four-stroke cycle takes <strong>two full revolutions (720 degrees)</strong>.
+          </p>
+          <p>
+            Only the third stroke (Power) pushes the piston down with burning gas to produce useful torque. The other three strokes borrow momentum stored in the rotating crankshaft and flywheel.
+          </p>
+        </div>
+        <div>
+          <p>
+            In a four-cylinder inline engine like the RAV4 X's M20A-FKS, the four cylinders are staggered 180 degrees apart in the 720-degree cycle (firing order <strong>1-3-4-2</strong>). Whenever one cylinder is pushing on its power stroke, the other three are taking turns handling intake, compression and exhaust.
+          </p>
+          <p>
+            That staggered firing turns intermittent bursts inside individual cylinders into steady spinning torque at the crankshaft output flange, ready to enter the transmission.
+          </p>
+        </div>
+      </div>
+
+      <details class="eng-details">
+        <summary>Engineering detail · Four-stroke kinematics, valve timing &amp; pressure-volume work (Heywood)</summary>
+        <div class="eng-body">
+          <p>
+            In a four-stroke spark-ignition engine (Heywood, <em>Internal Combustion Engine Fundamentals</em>), the camshafts rotate at exactly half crankshaft speed (1:2 ratio) so each intake and exhaust valve opens once every 720 crank degrees.
+          </p>
+          <div class="formula">
+            Piston pin height: y(θ) = R cos(θ) + √(L² - R² sin²(θ))   |   1 full cycle = 720° crank = 360° cam
+          </div>
+          <ul>
+            <li><strong>Spark advance:</strong> Ignition begins shortly before top dead centre (TDC) so peak cylinder pressure builds just after TDC while the piston starts downward.</li>
+            <li><strong>Pumping vs. work loop:</strong> On the full Inkworks drafting sheet's pressure-volume (P-V) chart, the area enclosed by the compression and expansion strokes represents positive indicated work, while the lower intake/exhaust loop represents pumping work.</li>
+            <li><strong>Simplifications in this demo:</strong> Valve lift curves, manifold pressure scaling and the 10:1 clearance volume in the stock Inkworks demo are smooth closed-form teaching models, not measured M20A-FKS dyno traces.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="sources-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">C</span><span id="sources-heading">Applicability &amp; sources</span></span>
+      </div>
+      <table class="spec-table">
+        <tbody>
+          <tr>
+            <th scope="row">Vehicle applicability</th>
+            <td>2019 Japan-market Toyota RAV4 X (2.0L M20A-FKS inline-four petrol, Direct Shift-CVT, FWD). 3D demo identified as generic inline-four.</td>
+          </tr>
+          <tr>
+            <th scope="row">Simplifications</th>
+            <td>Stock Inkworks generic inline-four geometry; closed-form valve lift and P-V pressure curves for clarity when stepping and scrubbing.</td>
+          </tr>
+          <tr>
+            <th scope="row">References</th>
+            <td>
+              <a href="https://global.toyota/en/newsroom/toyota/27541875.html" target="_blank" rel="noopener noreferrer">Toyota Japan RAV4 launch specifications</a> ·
+              John B. Heywood, <em>Internal Combustion Engine Fundamentals</em> ·
+              <a href="../inkworks/index.html?m=engine&amp;layout=sheet">Vendored Inkworks full drafting sheet</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <nav class="lesson-pager" aria-label="Lesson navigation">
+      <a class="btn" href="../index.html">← Back to Vehicle map</a>
+      <a class="btn btn-primary" href="driveline.html">Next: Direct Shift-CVT &amp; differential →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>How Cars Work · Lesson 02: Four-stroke petrol engine</span>
+      <span>2D cutaway + click-to-load Inkworks 3D embed</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/engine-fallback.js"></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direct Shift-CVT, final drive &amp; differential · How Cars Work</title>
+  <meta name="description" content="Trace torque from the engine through Toyota's Direct Shift-CVT launch gear and belt variator into the open differential and front wheels.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/lesson.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-tag">Fig. 02</span>
+        <span class="brand-name">How Cars Work</span>
+      </a>
+      <nav class="site-nav" aria-label="Lesson sequence">
+        <a href="../index.html">01 Vehicle map</a>
+        <a href="engine.html">02 Engine</a>
+        <a href="driveline.html" aria-current="page">03 Driveline</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="vehicle-bar" role="region" aria-label="Selected reference vehicle">
+    <div class="vehicle-bar-inner">
+      <span class="vehicle-pill">
+        <span class="vehicle-dot" aria-hidden="true"></span>
+        <span>Reference vehicle: 2019 Japan-market Toyota RAV4 X · 2.0L M20A-FKS petrol · Direct Shift-CVT · FWD</span>
+      </span>
+      <span class="vehicle-note">From fuel to the front wheels · Part 2 of 2</span>
+    </div>
+  </div>
+
+  <main class="page" id="main">
+    <header class="lesson-header">
+      <div>
+        <p class="eyebrow">Lesson 03 · Transmission, final drive &amp; differential</p>
+        <h1>How does engine spin reach <em>both front wheels</em>?</h1>
+        <p class="question-lead">
+          Two short interactions trace torque the rest of the way to the road: first through the Direct Shift-CVT, then through the open differential around a corner.
+        </p>
+      </div>
+
+      <aside class="mini-locator" aria-label="Location on vehicle map">
+        <div class="mini-locator-label">
+          <span>Vehicle locator</span>
+          <strong>02–04 · Driveline</strong>
+        </div>
+        <svg viewBox="0 0 240 86" role="img" aria-label="RAV4 side silhouette highlighting the front transaxle CVT, differential and front wheels">
+          <line x1="10" y1="74" x2="230" y2="74" stroke="#cfd6e0" stroke-width="1"/>
+          <path d="M 24 62 L 22 44 L 32 39 L 62 35 L 88 18 L 160 17 L 204 20 L 218 39 L 222 62 L 206 62 C 202 48 182 48 178 62 L 74 62 C 70 48 50 48 46 62 Z" fill="rgba(107,138,176,.08)" stroke="#6c7587" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <circle cx="192" cy="62" r="12" fill="#eef1f5" stroke="#6c7587" stroke-width="1.2"/>
+          <rect x="31" y="40" width="18" height="14" rx="2" fill="#c3ccd8" stroke="#6c7587" stroke-width="1"/>
+          <rect x="52" y="40" width="20" height="15" rx="2" fill="#d98e04" stroke="#161b26" stroke-width="1.2"/>
+          <circle cx="60" cy="62" r="12" fill="#e5482f" fill-opacity="0.28" stroke="#e5482f" stroke-width="1.8"/>
+          <circle cx="60" cy="62" r="4" fill="#e5482f"/>
+        </svg>
+      </aside>
+    </header>
+
+    <!-- ================= INTERACTION 1: DIRECT SHIFT-CVT ================= -->
+    <section class="sheet-block" id="cvt" aria-labelledby="cvt-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">A</span><span id="cvt-heading">Interaction 1 · Direct Shift-CVT (Launch → Cruise)</span></span>
+        <span class="block-hint">Engine input → Launch gear or steel belt → Final drive</span>
+      </div>
+
+      <div class="demo-panel">
+        <div class="demo-toolbar">
+          <div class="demo-status" id="cvtStatus" role="status" aria-live="polite">
+            Active path: <strong>Launch gear (fixed mechanical gear)</strong>
+          </div>
+          <div class="seg-group" role="group" aria-label="Direct Shift-CVT operating mode">
+            <button class="seg-btn" type="button" id="modeLaunchBtn" data-mode="launch" aria-pressed="true">1. Launch (fixed gear)</button>
+            <button class="seg-btn" type="button" id="modeCruiseBtn" data-mode="cruise" aria-pressed="false">2. Cruise (belt variator)</button>
+          </div>
+        </div>
+
+        <div class="demo-body">
+          <div class="svg-stage">
+            <svg id="cvtSvg" viewBox="0 0 740 280" role="img" aria-labelledby="cvt-svg-title cvt-svg-desc">
+              <title id="cvt-svg-title">Direct Shift-CVT torque path schematic</title>
+              <desc id="cvt-svg-desc">Shows torque entering from the engine crankshaft on the left, flowing either through the lower fixed launch gear or the upper steel-belt pulley variator, and exiting to the final drive on the right.</desc>
+
+              <!-- Start and End labels -->
+              <rect x="14" y="106" width="94" height="68" rx="3" fill="#c3ccd8" stroke="#161b26" stroke-width="1.6"/>
+              <text x="61" y="135" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#161b26">ENGINE</text>
+              <text x="61" y="152" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4a5263">CRANK INPUT</text>
+
+              <rect x="612" y="106" width="114" height="68" rx="3" fill="#c3ccd8" stroke="#161b26" stroke-width="1.6"/>
+              <text x="669" y="133" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#161b26">FINAL DRIVE</text>
+              <text x="669" y="150" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4a5263">TO DIFFERENTIAL</text>
+
+              <!-- Transaxle casing ghost box -->
+              <text x="144" y="13" font-family="Geist Mono, monospace" font-size="10" fill="#6c7587">DIRECT SHIFT-CVT TRANSAXLE HOUSING</text>
+              <rect x="142" y="20" width="436" height="240" rx="6" fill="rgba(107,138,176,0.04)" stroke="#8f98a7" stroke-width="1.3" stroke-dasharray="6 4"/>
+
+              <!-- Input shaft & rotor indicator -->
+              <line x1="108" y1="140" x2="188" y2="140" stroke="#e5482f" stroke-width="5" stroke-linecap="round"/>
+              <g id="cvtInRotor" transform="translate(154, 140)">
+                <circle cx="0" cy="0" r="14" fill="#eef1f5" stroke="#161b26" stroke-width="1.5"/>
+                <line x1="0" y1="0" x2="0" y2="-13" stroke="#e5482f" stroke-width="2.4" stroke-linecap="round"/>
+              </g>
+
+              <!-- Output shaft & rotor indicator -->
+              <line x1="534" y1="140" x2="612" y2="140" stroke="#e5482f" stroke-width="5" stroke-linecap="round"/>
+              <g id="cvtOutRotor" transform="translate(566, 140)">
+                <circle cx="0" cy="0" r="14" fill="#eef1f5" stroke="#161b26" stroke-width="1.5"/>
+                <line x1="0" y1="0" x2="0" y2="-13" stroke="#e5482f" stroke-width="2.4" stroke-linecap="round"/>
+              </g>
+
+              <!-- UPPER PATH: BELT VARIATOR (CRUISE) -->
+              <g id="beltPathGroup" opacity="0.42">
+                <!-- Branch connectors -->
+                <path id="beltBranchIn" d="M 188 140 L 188 94 L 248 94" fill="none" stroke="#8f98a7" stroke-width="4" stroke-linejoin="round"/>
+                <path id="beltBranchOut" d="M 472 94 L 534 94 L 534 140" fill="none" stroke="#8f98a7" stroke-width="4" stroke-linejoin="round"/>
+
+                <!-- Belt lines (updated dynamically by JS based on pulley radii) -->
+                <line id="beltTop" x1="268" y1="68" x2="452" y2="54" stroke="#161b26" stroke-width="4.5" stroke-linecap="round"/>
+                <line id="beltBot" x1="268" y1="120" x2="452" y2="134" stroke="#161b26" stroke-width="4.5" stroke-linecap="round"/>
+                <line id="beltDashTop" x1="268" y1="68" x2="452" y2="54" stroke="#2f7de1" stroke-width="2" stroke-dasharray="6 8"/>
+
+                <!-- Primary (drive) pulley -->
+                <g id="primaryPulley" transform="translate(268, 94)">
+                  <circle cx="0" cy="0" r="44" fill="#eef1f5" stroke="#8f98a7" stroke-width="1.2" stroke-dasharray="3 3"/>
+                  <circle id="priRim" cx="0" cy="0" r="26" fill="#c3ccd8" stroke="#161b26" stroke-width="1.8"/>
+                  <line id="priMark" x1="0" y1="0" x2="0" y2="-24" stroke="#2f7de1" stroke-width="2.4" stroke-linecap="round"/>
+                  <circle cx="0" cy="0" r="6" fill="#ffffff" stroke="#161b26" stroke-width="1.4"/>
+                </g>
+
+                <!-- Secondary (driven) pulley -->
+                <g id="secondaryPulley" transform="translate(452, 94)">
+                  <circle cx="0" cy="0" r="44" fill="#eef1f5" stroke="#8f98a7" stroke-width="1.2" stroke-dasharray="3 3"/>
+                  <circle id="secRim" cx="0" cy="0" r="40" fill="#c3ccd8" stroke="#161b26" stroke-width="1.8"/>
+                  <line id="secMark" x1="0" y1="0" x2="0" y2="-38" stroke="#2f7de1" stroke-width="2.4" stroke-linecap="round"/>
+                  <circle cx="0" cy="0" r="6" fill="#ffffff" stroke="#161b26" stroke-width="1.4"/>
+                </g>
+
+                <text x="360" y="38" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#2f7de1">CRUISE PATH · STEEL BELT VARIATOR</text>
+              </g>
+
+              <!-- LOWER PATH: FIXED LAUNCH GEAR -->
+              <g id="launchPathGroup" opacity="1">
+                <path id="launchBranchIn" d="M 188 140 L 188 206 L 310 206" fill="none" stroke="#e5482f" stroke-width="4.5" stroke-linejoin="round"/>
+                <path id="launchBranchOut" d="M 412 206 L 534 206 L 534 140" fill="none" stroke="#e5482f" stroke-width="4.5" stroke-linejoin="round"/>
+
+                <!-- Small drive gear meshing with larger driven launch gear -->
+                <g id="launchDriveGear" transform="translate(332, 206)">
+                  <circle cx="0" cy="0" r="20" fill="#d39a63" stroke="#161b26" stroke-width="1.8"/>
+                  <circle cx="0" cy="0" r="23" fill="none" stroke="#161b26" stroke-width="2" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="0" x2="0" y2="-18" stroke="#161b26" stroke-width="2.2" stroke-linecap="round"/>
+                  <circle cx="0" cy="0" r="5" fill="#ffffff" stroke="#161b26" stroke-width="1.3"/>
+                </g>
+
+                <g id="launchDrivenGear" transform="translate(388, 206)">
+                  <circle cx="0" cy="0" r="34" fill="#c3ccd8" stroke="#161b26" stroke-width="1.8"/>
+                  <circle cx="0" cy="0" r="37" fill="none" stroke="#161b26" stroke-width="2" stroke-dasharray="5 4"/>
+                  <line x1="0" y1="0" x2="0" y2="-32" stroke="#e5482f" stroke-width="2.4" stroke-linecap="round"/>
+                  <circle cx="0" cy="0" r="6" fill="#ffffff" stroke="#161b26" stroke-width="1.3"/>
+                </g>
+
+                <text x="360" y="253" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#e5482f">LAUNCH PATH · FIXED MECHANICAL LAUNCH GEAR</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="ctrl-bar">
+            <div class="range-wrap">
+              <label for="beltRatioSlider">Belt ratio (Cruise mode only)</label>
+              <input type="range" id="beltRatioSlider" min="0" max="100" value="35" disabled>
+              <span class="range-readout" id="beltRatioLabel">Locked (Launch gear)</span>
+            </div>
+            <div class="seg-group" role="group" aria-label="CVT animation controls">
+              <button class="seg-btn" type="button" id="cvtPlayBtn" aria-pressed="false">Play</button>
+              <button class="seg-btn" type="button" id="cvtResetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div class="readout-strip" aria-live="polite">
+            <div class="readout-card">
+              <span>Torque path</span>
+              <strong id="cvtReadPath">Fixed launch gear</strong>
+            </div>
+            <div class="readout-card">
+              <span>Illustrative ratio</span>
+              <strong id="cvtReadRatio">3.4 : 1 (fixed)</strong>
+            </div>
+            <div class="readout-card">
+              <span>Output vs input speed</span>
+              <strong id="cvtReadSpeed">0.29x speed · high torque</strong>
+            </div>
+          </div>
+
+          <p class="plain-explain" id="cvtExplain" aria-live="polite">
+            Pulling away from a stop needs high torque. In Launch mode, torque flows through meshing steel gears instead of the belt, giving crisp takeoff feel and protecting the belt from extreme low-ratio load.
+          </p>
+
+          <div class="notice-box">
+            <strong>Simplification note:</strong> Ratios shown above are illustrative to demonstrate torque multiplication versus cruising speed. In the real RAV4 Direct Shift-CVT, the transmission control unit decides when to hand off between the launch gear and belt variator using vehicle speed, load and operating conditions, not engine RPM alone.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INTERACTION 2: OPEN DIFFERENTIAL ================= -->
+    <section class="sheet-block" id="differential" aria-labelledby="diff-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">B</span><span id="diff-heading">Interaction 2 · Open differential &amp; front wheels (Straight → Left → Right)</span></span>
+        <span class="block-hint">Why do the front wheels turn at different speeds in a corner?</span>
+      </div>
+
+      <div class="demo-panel" id="wheels">
+        <div class="demo-toolbar">
+          <div class="demo-status" id="diffStatus" role="status" aria-live="polite">
+            Steering: <strong>Straight ahead</strong> · Both front wheels turn at the same speed
+          </div>
+          <div class="seg-group" role="group" aria-label="Cornering direction">
+            <button class="seg-btn" type="button" data-turn="straight" aria-pressed="true">Straight</button>
+            <button class="seg-btn" type="button" data-turn="left" aria-pressed="false">Left turn</button>
+            <button class="seg-btn" type="button" data-turn="right" aria-pressed="false">Right turn</button>
+          </div>
+        </div>
+
+        <div class="demo-body">
+          <div class="svg-stage">
+            <svg id="diffSvg" viewBox="0 0 740 310" role="img" aria-labelledby="diff-svg-title diff-svg-desc">
+              <title id="diff-svg-title">Top-down open differential and front wheels schematic</title>
+              <desc id="diff-svg-desc">Shows torque entering from the Direct Shift-CVT into the final-drive ring gear and differential carrier, splitting through spider gears and side gears to the left and right front half-shafts and front wheels.</desc>
+
+              <!-- Driving direction arrow at top -->
+              <g id="carDirGroup">
+                <path id="carPathArc" d="M 370 58 L 370 16" fill="none" stroke="#2f7de1" stroke-width="2.2" stroke-dasharray="4 3"/>
+                <polygon id="carPathHead" points="370,10 364,22 376,22" fill="#2f7de1"/>
+                <text id="carDirText" x="386" y="26" font-family="Geist Mono, monospace" font-size="10" fill="#2f7de1">TRAVEL: STRAIGHT</text>
+              </g>
+
+              <!-- Input from Direct Shift-CVT (bottom center) -->
+              <rect x="306" y="256" width="128" height="38" rx="3" fill="#c3ccd8" stroke="#161b26" stroke-width="1.5"/>
+              <text x="370" y="279" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#161b26">FROM CVT OUTPUT</text>
+              <line x1="370" y1="256" x2="370" y2="216" stroke="#e5482f" stroke-width="5"/>
+
+              <!-- Left and Right half-shafts -->
+              <line x1="150" y1="156" x2="310" y2="156" stroke="#161b26" stroke-width="7" stroke-linecap="round"/>
+              <line x1="430" y1="156" x2="590" y2="156" stroke="#161b26" stroke-width="7" stroke-linecap="round"/>
+              <text x="226" y="142" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" fill="#4a5263">LEFT HALF-SHAFT</text>
+              <text x="514" y="142" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" fill="#4a5263">RIGHT HALF-SHAFT</text>
+
+              <!-- Open Differential housing & ring gear (center) -->
+              <rect x="296" y="96" width="148" height="120" rx="8" fill="#eef1f5" stroke="#161b26" stroke-width="1.8"/>
+              <!-- Ring gear flange on left of carrier -->
+              <rect x="306" y="106" width="14" height="100" rx="2" fill="#d39a63" stroke="#161b26" stroke-width="1.4"/>
+              <g id="ringTicks" stroke="#161b26" stroke-width="1.3">
+                <line x1="306" y1="120" x2="320" y2="120"/>
+                <line x1="306" y1="138" x2="320" y2="138"/>
+                <line x1="306" y1="156" x2="320" y2="156"/>
+                <line x1="306" y1="174" x2="320" y2="174"/>
+                <line x1="306" y1="192" x2="320" y2="192"/>
+              </g>
+
+              <!-- Left & Right side gears inside carrier -->
+              <rect x="332" y="132" width="16" height="48" rx="2" fill="#c3ccd8" stroke="#161b26" stroke-width="1.4"/>
+              <rect x="404" y="132" width="16" height="48" rx="2" fill="#c3ccd8" stroke="#161b26" stroke-width="1.4"/>
+
+              <!-- Spider (pinion) gear center assembly -->
+              <g id="spiderGear" transform="translate(376, 156)">
+                <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#161b26" stroke-width="1.6"/>
+                <circle cx="0" cy="0" r="15" fill="none" stroke="#8f98a7" stroke-width="1.2" stroke-dasharray="3 3"/>
+                <line x1="-15" y1="0" x2="15" y2="0" stroke="#e5482f" stroke-width="2.4" stroke-linecap="round"/>
+                <line x1="0" y1="-15" x2="0" y2="15" stroke="#161b26" stroke-width="1.6" stroke-linecap="round"/>
+                <circle cx="0" cy="0" r="4" fill="#e5482f"/>
+              </g>
+              <text x="370" y="88" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#161b26">OPEN DIFFERENTIAL &amp; SPIDER GEARS</text>
+
+              <!-- LEFT FRONT WHEEL (with speed ring & tread markers) -->
+              <g id="leftWheelSteer" transform="translate(114, 156)">
+                <rect x="-26" y="-58" width="52" height="116" rx="10" fill="#8f98a7" fill-opacity="0.32" stroke="#161b26" stroke-width="2.2"/>
+                <g id="leftTreads" stroke="#161b26" stroke-width="2">
+                  <line x1="-22" y1="-36" x2="22" y2="-36"/>
+                  <line x1="-22" y1="0" x2="22" y2="0"/>
+                  <line x1="-22" y1="36" x2="22" y2="36"/>
+                </g>
+              </g>
+              <g id="leftWheelDial" transform="translate(114, 248)">
+                <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#161b26" stroke-width="1.5"/>
+                <line id="leftNeedle" x1="0" y1="0" x2="0" y2="-19" stroke="#2f7de1" stroke-width="2.6" stroke-linecap="round"/>
+                <circle cx="0" cy="0" r="4" fill="#161b26"/>
+              </g>
+              <text x="114" y="286" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#161b26">LEFT WHEEL</text>
+              <text id="leftPctSvg" x="114" y="300" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#2f7de1">100% speed</text>
+
+              <!-- RIGHT FRONT WHEEL (with speed ring & tread markers) -->
+              <g id="rightWheelSteer" transform="translate(626, 156)">
+                <rect x="-26" y="-58" width="52" height="116" rx="10" fill="#8f98a7" fill-opacity="0.32" stroke="#161b26" stroke-width="2.2"/>
+                <g id="rightTreads" stroke="#161b26" stroke-width="2">
+                  <line x1="-22" y1="-36" x2="22" y2="-36"/>
+                  <line x1="-22" y1="0" x2="22" y2="0"/>
+                  <line x1="-22" y1="36" x2="22" y2="36"/>
+                </g>
+              </g>
+              <g id="rightWheelDial" transform="translate(626, 248)">
+                <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#161b26" stroke-width="1.5"/>
+                <line id="rightNeedle" x1="0" y1="0" x2="0" y2="-19" stroke="#e5482f" stroke-width="2.6" stroke-linecap="round"/>
+                <circle cx="0" cy="0" r="4" fill="#161b26"/>
+              </g>
+              <text x="626" y="286" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#161b26">RIGHT WHEEL</text>
+              <text id="rightPctSvg" x="626" y="300" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#e5482f">100% speed</text>
+            </svg>
+          </div>
+
+          <div class="ctrl-bar">
+            <div class="seg-group" role="group" aria-label="Differential playback controls">
+              <button class="seg-btn" type="button" id="diffPlayBtn" aria-pressed="false">Play</button>
+              <button class="seg-btn" type="button" id="diffResetBtn">Reset</button>
+            </div>
+            <span class="block-hint">Spider gear stays locked relative to carrier straight ahead and spins in a turn</span>
+          </div>
+
+          <div class="readout-strip" aria-live="polite">
+            <div class="readout-card">
+              <span>Left front wheel</span>
+              <strong id="diffReadLeft">100% of ring speed</strong>
+            </div>
+            <div class="readout-card">
+              <span>Spider gears</span>
+              <strong id="diffReadSpider">Stationary on pin</strong>
+            </div>
+            <div class="readout-card">
+              <span>Right front wheel</span>
+              <strong id="diffReadRight">100% of ring speed</strong>
+            </div>
+          </div>
+
+          <p class="plain-explain" id="diffExplain" aria-live="polite">
+            Driving straight ahead, both front tyres cover the same distance. The differential carrier turns both side gears together at the same speed, so the spider gears do not need to spin on their own pin.
+          </p>
+        </div>
+      </div>
+
+      <details class="eng-details">
+        <summary>Engineering detail · Direct Shift-CVT handoff &amp; open differential speed rule</summary>
+        <div class="eng-body">
+          <p>
+            <strong>Why Toyota added a launch gear to a CVT:</strong> Conventional belt CVTs lose efficiency when running at very tight pulley radii during standing starts. Offloading low-speed launch duty to a physical gear lets the variator operate in a narrower, higher-efficiency range with smaller pulleys and a wider overall ratio spread (Toyota TNGA Direct Shift-CVT).
+          </p>
+          <p>
+            <strong>Why wheels can spin at different speeds:</strong> Inside an open differential, the average angular speed of the two front wheels always equals the ring-gear carrier speed:
+          </p>
+          <div class="formula">
+            (ω_left + ω_right) / 2 = ω_carrier   |   Example turn: (75% + 125%) / 2 = 100%
+          </div>
+          <p>
+            Whatever speed the inner wheel gives up around a tighter radius, the spider gears immediately pass to the outer wheel so neither tyre has to scrub across the road.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="sheet-block" aria-labelledby="sources-heading">
+      <div class="block-head">
+        <span class="block-label"><span class="block-code">C</span><span id="sources-heading">Applicability &amp; sources</span></span>
+      </div>
+      <table class="spec-table">
+        <tbody>
+          <tr>
+            <th scope="row">Vehicle applicability</th>
+            <td>2019 Japan-market Toyota RAV4 X (2.0L M20A-FKS petrol, Direct Shift-CVT, front-wheel drive).</td>
+          </tr>
+          <tr>
+            <th scope="row">Simplifications</th>
+            <td>Illustrative launch/belt ratio numbers and 75%/125% turning split show mechanical behaviour clearly; real shift handoff depends on multiple vehicle sensors rather than engine RPM alone.</td>
+          </tr>
+          <tr>
+            <th scope="row">References</th>
+            <td>
+              <a href="https://global.toyota/en/newsroom/toyota/27541875.html" target="_blank" rel="noopener noreferrer">Toyota Japan RAV4 launch specifications</a> ·
+              <a href="https://global.toyota/en/mobility/tnga/powertrain2018/cvt/" target="_blank" rel="noopener noreferrer">Toyota Direct Shift-CVT overview</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <nav class="lesson-pager" aria-label="Lesson navigation">
+      <a class="btn" href="engine.html">← Back to Engine lesson</a>
+      <a class="btn btn-primary" href="../index.html">Return to Vehicle map</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>How Cars Work · Lesson 03: Direct Shift-CVT &amp; differential</span>
+      <span>Milestone 1 complete: From fuel to the front wheels</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/driveline-sim.js"></script>
+</body>
+</html>

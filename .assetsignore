@@ -1,6 +1,8 @@
 # Exclude git metadata, local reference PDFs, Python tools, tests, and docs from Cloudflare static assets
 .git/
 .git/**
+.wrangler/
+.wrangler/**
 .gitignore
 .assetsignore
 wrangler.jsonc
